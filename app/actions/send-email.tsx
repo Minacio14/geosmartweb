@@ -1,5 +1,7 @@
 "use server"
 
+import nodemailer from "nodemailer"
+
 interface EmailData {
   name: string
   email: string
@@ -34,35 +36,62 @@ export async function sendContactEmail(data: EmailData) {
       }
     }
 
-    // Send email using fetch API (works with most email services)
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    // Create nodemailer transporter using TurboHost SMTP
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || "mail.geosmart-su.co.mz",
+      port: parseInt(process.env.SMTP_PORT || "465"),
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: process.env.SMTP_USER || "info@geosmart-su.co.mz",
+        pass: process.env.SMTP_PASSWORD,
       },
-      body: JSON.stringify({
-        access_key: process.env.WEB3FORMS_ACCESS_KEY,
-        name: data.name,
-        email: data.email,
-        message: data.message,
-        to_email: "info@geosmart-su.co.mz",
-        subject: `New Contact Form Submission from ${data.name}`,
-        from_name: "GeoSMART Contact Form",
-      }),
     })
 
-    if (!response.ok) {
-      throw new Error("Failed to send email")
+    // Email content
+    const mailOptions = {
+      from: `"GeoSMART Website" <${process.env.SMTP_USER || "info@geosmart-su.co.mz"}>`,
+      to: "info@geosmart-su.co.mz",
+      replyTo: data.email,
+      subject: `New Contact Form Submission from ${data.name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #1a1a1a; border-bottom: 3px solid #fbbf24; padding-bottom: 10px;">
+            New Contact Form Submission
+          </h2>
+          
+          <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 10px 0;"><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+            <p style="margin: 10px 0;"><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+          </div>
+          
+          <div style="margin: 20px 0;">
+            <h3 style="color: #1a1a1a;">Message:</h3>
+            <p style="white-space: pre-wrap; line-height: 1.6;">${escapeHtml(data.message)}</p>
+          </div>
+          
+          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
+          
+          <p style="color: #6b7280; font-size: 12px; text-align: center;">
+            This email was sent from the GeoSMART website contact form
+          </p>
+        </div>
+      `,
+      text: `
+New Contact Form Submission
+
+Name: ${data.name}
+Email: ${data.email}
+
+Message:
+${data.message}
+
+---
+This email was sent from the GeoSMART website contact form
+      `,
     }
 
-    const result = await response.json()
-
-    if (!result.success) {
-      return {
-        success: false,
-        error: "Failed to send email. Please try again later.",
-      }
-    }
+    // Send email
+    await transporter.sendMail(mailOptions)
 
     return {
       success: true,

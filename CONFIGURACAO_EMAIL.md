@@ -5,43 +5,58 @@
 ### 1. Título e Favicon do Site
 - **Título atualizado**: "GeoSMART - Engineering the Ground, Enabling Sustainability"
 - **Descrição**: Descrição profissional dos serviços
-- **Favicon**: Configurado para usar /favicon.ico (adicionar logo da empresa)
+- **Favicon**: Logo da GeoSMART
 
 ### 2. Links de Contato Corrigidos
-Todos os botões "Contact Us" nas páginas de serviços agora redirecionam corretamente para `/#contato` na homepage, com scroll automático para a seção de contato.
+Todos os botões "Contact" e links de navegação (navbar e footer) agora funcionam perfeitamente em todas as páginas.
 
 Páginas corrigidas:
-- ✅ Environment
-- ✅ Geohydrology
-- ✅ Geotechnics
-- ✅ Mining
-- ✅ Monitoring
-- ✅ Training
+- ✅ Navbar: Services, About Us, Contact
+- ✅ Footer: Services, About Us, Contact
+- ✅ Páginas de serviços (6 páginas)
 
-### 3. Sistema de Email Configurado
-O formulário de contato usa **Web3Forms** (serviço gratuito e confiável).
+### 3. Sistema de Email - SMTP TurboHost
+O formulário de contato agora usa **nodemailer** com o servidor SMTP do próprio domínio (TurboHost).
 
 ---
 
 ## 📧 Configuração do Email no Vercel
 
-### Passo 1: Obter Access Key do Web3Forms
+### Passo 1: Obter Senha do Email
 
-1. Acesse: https://web3forms.com/
-2. Clique em **"Get Started Free"**
-3. Insira o email: **info@geosmart-su.co.mz**
-4. Verifique o email e copie o **Access Key**
+Você precisa da **senha do email info@geosmart-su.co.mz** do painel do TurboHost.
 
-### Passo 2: Adicionar Variável de Ambiente no Vercel
+1. Acesse o cPanel do TurboHost
+2. Vá em **Email Accounts**
+3. Encontre: **info@geosmart-su.co.mz**
+4. Copie ou redefina a senha
+
+### Passo 2: Adicionar Variáveis de Ambiente no Vercel
 
 1. Acesse: https://vercel.com/
-2. Vá para o seu projeto **geosmartweb**
+2. Vá para o projeto **geosmartweb**
 3. Clique em **Settings** → **Environment Variables**
-4. Adicione uma nova variável:
-   - **Name**: `WEB3FORMS_ACCESS_KEY`
-   - **Value**: [Cole o Access Key obtido do Web3Forms]
-   - **Environment**: Selecione **Production**, **Preview** e **Development**
-5. Clique em **Save**
+4. Adicione estas 4 variáveis:
+
+```
+Key: SMTP_HOST
+Value: mail.geosmart-su.co.mz
+Environments: ✓ Production ✓ Preview ✓ Development
+
+Key: SMTP_PORT
+Value: 465
+Environments: ✓ Production ✓ Preview ✓ Development
+
+Key: SMTP_USER
+Value: info@geosmart-su.co.mz
+Environments: ✓ Production ✓ Preview ✓ Development
+
+Key: SMTP_PASSWORD
+Value: [senha do email info@geosmart-su.co.mz]
+Environments: ✓ Production ✓ Preview ✓ Development
+```
+
+5. Clique em **Save** em cada uma
 
 ### Passo 3: Fazer Redeploy
 
@@ -52,19 +67,9 @@ O formulário de contato usa **Web3Forms** (serviço gratuito e confiável).
 
 ---
 
-## 🎨 Adicionar Logo/Favicon
+## 🎨 Logo/Favicon
 
-Para remover completamente o ícone do v0, adicione o logo da GeoSmart:
-
-1. **Criar favicon**: Converta o logo para formato .ico ou .png (32x32 pixels)
-2. **Colocar na pasta public**:
-   - `public/favicon.ico` - Para browsers
-   - `public/apple-icon.png` - Para dispositivos Apple (180x180 pixels)
-   - `public/icon.svg` - Versão vetorial (opcional)
-
-### Ferramentas para criar favicon:
-- https://favicon.io/
-- https://realfavicongenerator.net/
+✅ **Completo!** O logo da GeoSMART já está configurado como favicon.
 
 ---
 
@@ -73,7 +78,7 @@ Para remover completamente o ícone do v0, adicione o logo da GeoSmart:
 Após configurar no Vercel:
 
 1. Acesse o site: https://geosmart-su.co.mz
-2. Vá para a seção "Contact"
+2. Vá para a seção "Contact" (de qualquer página)
 3. Preencha o formulário
 4. Clique em "Send Message"
 5. Verifique o email **info@geosmart-su.co.mz**
@@ -83,11 +88,12 @@ Após configurar no Vercel:
 ## 📝 Checklist
 
 - [x] Título do site atualizado
-- [x] Links de Contact corrigidos
-- [x] Sistema de email configurado
-- [ ] Adicionar Access Key no Vercel
+- [x] Logo/favicon da GeoSMART
+- [x] Links de navegação corrigidos (navbar + footer)
+- [x] Links de Contact nas páginas de serviços
+- [x] Sistema de email configurado (nodemailer + SMTP)
+- [ ] Adicionar variáveis SMTP no Vercel
 - [ ] Fazer redeploy do site
-- [ ] Adicionar logo/favicon personalizado
 - [ ] Testar envio de email
 
 ---
@@ -97,32 +103,26 @@ Após configurar no Vercel:
 **Problema**: "Failed to send email. Please try again later."
 
 **Solução**:
-1. Verifique se a variável `WEB3FORMS_ACCESS_KEY` está configurada no Vercel
-2. Confirme que fez o redeploy após adicionar a variável
-3. Verifique se o Access Key está correto no Web3Forms
+1. Verifique se as 4 variáveis SMTP estão configuradas no Vercel
+2. Confirme que a senha do email está correta
+3. Verifique se fez o redeploy após adicionar as variáveis
+4. Teste o email manualmente no webmail do TurboHost
 
-**Problema**: Email não chega
+**Problema**: "Connection refused" ou "SMTP error"
 
 **Solução**:
-1. Verifique a pasta de spam
-2. Confirme que o email está verificado no Web3Forms
-3. Teste com outro email para verificar se o problema é específico
+1. Confirme que o host é: `mail.geosmart-su.co.mz`
+2. Confirme que a porta é: `465`
+3. Verifique se o email existe no cPanel
 
 ---
 
-## 💡 Alternativa: Resend (se preferir)
+## 📞 Configurações SMTP do TurboHost
 
-Se quiser usar outro serviço de email, pode configurar o **Resend**:
-
-1. Crie conta em: https://resend.com/
-2. Obtenha API Key
-3. Configure no Vercel: `RESEND_API_KEY`
-4. Atualize o arquivo `send-email.tsx` para usar Resend
-
----
-
-## 📞 Suporte
-
-Para qualquer dúvida:
-- Email: info@geosmart-su.co.mz
-- Telefone: +258 85 353 535 2
+```
+Servidor SMTP: mail.geosmart-su.co.mz
+Porta: 465 (SSL/TLS)
+Usuário: info@geosmart-su.co.mz
+Senha: [sua senha do cPanel]
+Segurança: SSL/TLS
+```
