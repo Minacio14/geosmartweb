@@ -166,7 +166,7 @@ export default function MonitoringPage() {
             >
               <h3 className="mb-4 text-2xl font-bold text-white">Ensure project success with monitoring</h3>
               <p className="mb-8 text-neutral-300">Let us help you track performance and optimize your operations.</p>
-              <a href="/?section=contato">
+              <a href="/#contato">
                 <Button className="rounded-full bg-yellow-400 px-8 py-3 font-semibold text-neutral-900 transition-all hover:bg-yellow-300">
                   Contact Us
                 </Button>

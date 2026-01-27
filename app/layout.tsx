@@ -7,21 +7,18 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'GeoSMART - Engineering the Ground, Enabling Sustainability',
+  description: 'Geotechnical, Hydrological & Environmental Solutions in Mozambique. Expert services in geotechnics, geohydrology, environmental studies, mining, and monitoring.',
+  keywords: 'geotechnical, geohydrology, environmental, mining, monitoring, Mozambique, engineering, sustainability',
+  authors: [{ name: 'GeoSMART' }],
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: '/favicon.png',
+        sizes: 'any',
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
+        url: '/GEOSMART LOGO.svg',
         type: 'image/svg+xml',
       },
     ],

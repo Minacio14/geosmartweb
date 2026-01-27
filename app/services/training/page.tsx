@@ -166,7 +166,7 @@ export default function TrainingPage() {
             >
               <h3 className="mb-4 text-2xl font-bold text-white">Invest in your team's expertise</h3>
               <p className="mb-8 text-neutral-300">Develop technical skills and knowledge with our specialized training programs.</p>
-              <a href="/?section=contato">
+              <a href="/#contato">
                 <Button className="rounded-full bg-yellow-400 px-8 py-3 font-semibold text-neutral-900 transition-all hover:bg-yellow-300">
                   Contact Us
                 </Button>

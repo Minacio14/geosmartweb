@@ -119,7 +119,7 @@ export default function GeotechnicsPage() {
             >
               <h3 className="mb-4 text-2xl font-bold text-white">Ready to get started?</h3>
               <p className="mb-8 text-neutral-300">Contact us to discuss your geotechnical engineering needs.</p>
-              <a href="/?section=contato">
+              <a href="/#contato">
                 <Button className="rounded-full bg-yellow-400 px-8 py-3 font-semibold text-neutral-900 transition-all hover:bg-yellow-300">
                   Contact Us
                 </Button>
