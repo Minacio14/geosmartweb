@@ -19,19 +19,11 @@ export function StickyNavbar() {
   }, [])
 
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, targetId?: string) => {
-    if (targetId) {
+    if (targetId && window.location.pathname === "/") {
       e.preventDefault()
-      
-      // If on homepage, scroll to section
-      if (window.location.pathname === "/") {
-        const element = document.getElementById(targetId)
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" })
-        }
-      } else {
-        // If on service page, navigate to home with section parameter
-        const url = `/?section=${targetId}`
-        window.location.href = url
+      const element = document.getElementById(targetId)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
       }
     }
   }
@@ -65,21 +57,21 @@ export function StickyNavbar() {
           Home
         </a>
         <a
-          href="#servicos"
+          href="/#servicos"
           onClick={(e) => handleNavigation(e, "servicos")}
           className="text-base font-medium text-neutral-200 transition-colors hover:text-yellow-400"
         >
           Services
         </a>
         <a
-          href="#sobre"
+          href="/#sobre"
           onClick={(e) => handleNavigation(e, "sobre")}
           className="text-base font-medium text-neutral-200 transition-colors hover:text-yellow-400"
         >
           About Us
         </a>
         <a
-          href="#contato"
+          href="/#contato"
           onClick={(e) => handleNavigation(e, "contato")}
         >
           <Button className="rounded-full bg-yellow-400 px-8 py-2 text-base font-semibold text-neutral-900 transition-all hover:bg-yellow-500 hover:shadow-lg">

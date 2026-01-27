@@ -26,17 +26,17 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/?section=servicos" className="text-sm text-neutral-400 transition-colors hover:text-yellow-400">
+                <a href="/#servicos" className="text-sm text-neutral-400 transition-colors hover:text-yellow-400">
                   Services
                 </a>
               </li>
               <li>
-                <a href="/?section=sobre" className="text-sm text-neutral-400 transition-colors hover:text-yellow-400">
+                <a href="/#sobre" className="text-sm text-neutral-400 transition-colors hover:text-yellow-400">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="/?section=contato" className="text-sm text-neutral-400 transition-colors hover:text-yellow-400">
+                <a href="/#contato" className="text-sm text-neutral-400 transition-colors hover:text-yellow-400">
                   Contact
                 </a>
               </li>
