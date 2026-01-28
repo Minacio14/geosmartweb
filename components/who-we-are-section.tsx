@@ -16,7 +16,7 @@ export function WhoWeAreSection() {
             className="relative overflow-hidden rounded-lg"
           >
             <img
-              src="/public/images/about-us-hero.jpg"
+              src="/images/about-us-hero.jpg"
               alt="GeoSMART team collaboration"
               className="h-full w-full object-cover"
             />
