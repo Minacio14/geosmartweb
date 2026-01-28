@@ -4,124 +4,201 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { StickyNavbar } from "@/components/sticky-navbar"
 import { Footer } from "@/components/footer"
-import { ArrowRight } from "lucide-react"
+import { useState } from "react"
+
+interface ServiceCard {
+  title: string
+  icon: string
+  frontDescription: string
+  backDetails: string[]
+}
 
 export default function GeohydrologyPage() {
+  const [flippedCard, setFlippedCard] = useState<number | null>(null)
+
+  const services: ServiceCard[] = [
+    {
+      title: "Águas Subterrâneas",
+      icon: "💧",
+      frontDescription: "Soluções avançadas para água e recursos hídricos subterrâneos.",
+      backDetails: [
+        "Hydrogeological investigations and mapping",
+        "Groundwater exploration and well design",
+        "Aquifer characterization and testing",
+        "Sustainable water resource management",
+        "Groundwater quality assessment",
+      ],
+    },
+    {
+      title: "Perfuração & Poços",
+      icon: "🔧",
+      frontDescription: "Perfuração especializada e construção de poços de água.",
+      backDetails: [
+        "Borehole drilling and construction",
+        "Water well development",
+        "Pump installation and testing",
+        "Well rehabilitation and maintenance",
+        "Drilling supervision and quality control",
+      ],
+    },
+    {
+      title: "Barragens & Químicos",
+      icon: "⚗️",
+      frontDescription: "Estudos hidráulicos e análises químicas avançadas.",
+      backDetails: [
+        "Dam design and safety assessment",
+        "Hydraulic modeling and analysis",
+        "Water quality testing and monitoring",
+        "Chemical analysis of water samples",
+        "Environmental impact assessment",
+      ],
+    },
+    {
+      title: "Mitigação de Enchentes",
+      icon: "🌊",
+      frontDescription: "Soluções para controle e mitigação de inundações.",
+      backDetails: [
+        "Flood risk assessment and mapping",
+        "Drainage system design",
+        "Stormwater management solutions",
+        "Hydrological modeling",
+        "Climate resilience planning",
+      ],
+    },
+  ]
+
+  const additionalServices = [
+    { icon: "🔍", title: "Consultoria" },
+    { icon: "💡", title: "Inovação" },
+    { icon: "🎯", title: "Partículas" },
+    { icon: "🛠️", title: "Tratamento" },
+  ]
+
   return (
     <>
       <StickyNavbar />
-      <main>
-        {/* Header with Side Image */}
-        <section className="relative overflow-hidden bg-neutral-950 pt-20">
-          <div className="grid min-h-96 grid-cols-1 lg:grid-cols-2 lg:gap-12">
-            {/* Left Content - Compact */}
-            <div className="flex flex-col justify-center px-8 py-12 lg:px-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h1 className="text-3xl font-bold text-white md:text-4xl">
-                  GeoHydrology & Hydraulic Studies
-                </h1>
-                <p className="mt-4 text-base text-neutral-400">
-                  End-to-end subsurface investigation and water engineering solutions with advanced hydrological and hydraulic studies.
-                </p>
-              </motion.div>
-            </div>
+      <main className="min-h-screen bg-neutral-950">
+        {/* Hero Header */}
+        <section className="relative bg-gradient-to-br from-neutral-900 to-neutral-950 px-8 py-32 lg:px-16">
+          <div className="mx-auto max-w-7xl text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 text-5xl font-bold text-white lg:text-6xl"
+            >
+              GEOHIDROLOGIA & ESTUDOS HIDRÁULICOS
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="mx-auto max-w-3xl text-xl text-neutral-300"
+            >
+              Soluções avançadas para água e recursos hídricos subterrâneos.
+            </motion.p>
+          </div>
+        </section>
 
-            {/* Right Image */}
-            <div className="hidden h-96 lg:flex lg:items-center lg:justify-center">
-              <img
-                src="/images/service-geohydrology-side.jpg"
-                alt="GeoHydrology & Hydraulic Studies"
-                className="h-full w-full object-cover"
-              />
+        {/* Services Cards Grid */}
+        <section className="bg-neutral-950 px-8 py-24 lg:px-16">
+          <div className="mx-auto max-w-7xl">
+            <h2 className="mb-16 text-center text-3xl font-bold text-white">NOSSOS SERVIÇOS</h2>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group perspective-1000"
+                  style={{ perspective: "1000px" }}
+                >
+                  <div
+                    className="relative h-96 w-full cursor-pointer transition-transform duration-700"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: flippedCard === index ? "rotateY(180deg)" : "rotateY(0deg)",
+                    }}
+                    onClick={() => setFlippedCard(flippedCard === index ? null : index)}
+                  >
+                    {/* Front of Card */}
+                    <div
+                      className="absolute inset-0 flex flex-col items-center justify-center rounded-lg border-2 border-neutral-800 bg-neutral-900 p-8 text-center"
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      <div className="mb-6 text-6xl">{service.icon}</div>
+                      <h3 className="mb-4 text-xl font-bold text-white">{service.title}</h3>
+                      <p className="text-sm text-neutral-400">{service.frontDescription}</p>
+                      <div className="mt-6 text-xs text-yellow-400">Click to see details →</div>
+                    </div>
+
+                    {/* Back of Card */}
+                    <div
+                      className="absolute inset-0 flex flex-col justify-center rounded-lg border-2 border-yellow-400 bg-neutral-900 p-6"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <h3 className="mb-4 text-center text-lg font-bold text-yellow-400">{service.title}</h3>
+                      <ul className="space-y-2">
+                        {service.backDetails.map((detail, i) => (
+                          <li key={i} className="flex items-start text-sm text-neutral-300">
+                            <span className="mr-2 mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400" />
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-4 text-center text-xs text-yellow-400">Click to flip back</div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Content Section - Full Width */}
-        <section className="bg-neutral-950 px-8 py-24 lg:px-16 lg:py-32">
+        {/* Additional Solutions */}
+        <section className="bg-neutral-900 px-8 py-16 lg:px-16">
           <div className="mx-auto max-w-7xl">
-            {/* Services Grid */}
-            <div className="mb-24 grid gap-16 md:grid-cols-2 lg:gap-24">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="mb-8 text-3xl font-bold text-white">Our Expertise</h2>
-                <ul className="space-y-4 text-neutral-300">
-                  <li className="flex items-start gap-3">
-                    <ArrowRight className="mt-1 h-6 w-6 shrink-0 text-yellow-400" />
-                    <span className="text-lg">Groundwater and surface water flow studies</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <ArrowRight className="mt-1 h-6 w-6 shrink-0 text-yellow-400" />
-                    <span className="text-lg">Hydrogeological modelling and analysis</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <ArrowRight className="mt-1 h-6 w-6 shrink-0 text-yellow-400" />
-                    <span className="text-lg">Contamination assessment and monitoring</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <ArrowRight className="mt-1 h-6 w-6 shrink-0 text-yellow-400" />
-                    <span className="text-lg">Groundwater prospecting and evaluation</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <ArrowRight className="mt-1 h-6 w-6 shrink-0 text-yellow-400" />
-                    <span className="text-lg">Flood risk assessment and mitigation</span>
-                  </li>
-                </ul>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <h2 className="mb-8 text-3xl font-bold text-white">Technical Services</h2>
-                <ul className="space-y-4 text-neutral-300">
-                  <li className="flex items-start gap-3">
-                    <div className="mt-2 h-3 w-3 rounded-full bg-yellow-400 shrink-0" />
-                    <span className="text-lg">Permeability tests in soils and rocks</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-2 h-3 w-3 rounded-full bg-yellow-400 shrink-0" />
-                    <span className="text-lg">Water wells and boreholes</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-2 h-3 w-3 rounded-full bg-yellow-400 shrink-0" />
-                    <span className="text-lg">Hydraulic design and water-supply systems</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-2 h-3 w-3 rounded-full bg-yellow-400 shrink-0" />
-                    <span className="text-lg">Dam design and water-risk assessments</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-2 h-3 w-3 rounded-full bg-yellow-400 shrink-0" />
-                    <span className="text-lg">Geophysical prospecting and surveys</span>
-                  </li>
-                </ul>
-              </motion.div>
+            <h3 className="mb-8 text-center text-2xl font-bold text-white">SOLUÇÕES ADICIONAIS</h3>
+            <div className="flex flex-wrap justify-center gap-8">
+              {additionalServices.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-neutral-800 text-3xl">
+                    {service.icon}
+                  </div>
+                  <span className="text-sm text-neutral-400">{service.title}</span>
+                </motion.div>
+              ))}
             </div>
+          </div>
+        </section>
 
-            {/* CTA Section */}
+        {/* CTA Section */}
+        <section className="bg-neutral-950 px-8 py-24 lg:px-16">
+          <div className="mx-auto max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="rounded-lg border border-neutral-800 bg-neutral-900 p-8 text-center lg:p-12"
+              className="rounded-lg border border-neutral-800 bg-neutral-900 p-12 text-center"
             >
-              <h3 className="mb-4 text-2xl font-bold text-white">Need hydrological solutions?</h3>
-              <p className="mb-8 text-neutral-300">Let us help you manage water resources effectively and sustainably.</p>
+              <h3 className="mb-4 text-3xl font-bold text-white">PRECISA DE SOLUÇÕES HIDROLÓGICAS?</h3>
+              <p className="mb-8 text-lg text-neutral-300">
+                Deixe-nos ajudá-lo a gerenciar recursos hídricos de forma eficaz e sustentável.
+              </p>
               <a href="/#contato">
-                <Button className="rounded-full bg-yellow-400 px-8 py-3 font-semibold text-neutral-900 transition-all hover:bg-yellow-300">
-                  Contact Us
+                <Button className="rounded-full bg-yellow-400 px-10 py-6 text-lg font-semibold text-neutral-900 transition-all hover:bg-yellow-300">
+                  FALE CONOSCO
                 </Button>
               </a>
             </motion.div>
