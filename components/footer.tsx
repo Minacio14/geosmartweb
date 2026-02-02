@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-4 lg:gap-16">
           {/* Logo and Description */}
           <div className="lg:col-span-1">
-            <img src="/images/geosmart-logo.png" alt="GeoSMART" className="mb-6 h-12 w-auto" />
+            <img src="/images/geosmart-logo.png" alt="GeoSMART" className="mb-6 h-16 w-auto" />
             <p className="text-sm font-light leading-relaxed text-neutral-400">
               Specialized consulting in geotechnics, geohydrology, geology, and environment.
             </p>

@@ -39,7 +39,7 @@ export function StickyNavbar() {
     >
       {/* Logo - Links to Home */}
       <a href="/" className="flex items-center gap-2 transition-transform hover:scale-105">
-        <img src="/images/geosmart-logo.png" alt="GeoSMART" className="h-10 w-auto" />
+        <img src="/images/geosmart-logo.png" alt="GeoSMART" className="h-14 w-auto lg:h-16" />
       </a>
 
       {/* Navigation Links */}

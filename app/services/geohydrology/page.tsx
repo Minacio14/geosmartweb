@@ -18,9 +18,9 @@ export default function GeohydrologyPage() {
 
   const services: ServiceCard[] = [
     {
-      title: "Águas Subterrâneas",
+      title: "Groundwater",
       icon: "💧",
-      frontDescription: "Soluções avançadas para água e recursos hídricos subterrâneos.",
+      frontDescription: "Advanced solutions for water and underground water resources.",
       backDetails: [
         "Hydrogeological investigations and mapping",
         "Groundwater exploration and well design",
@@ -30,9 +30,9 @@ export default function GeohydrologyPage() {
       ],
     },
     {
-      title: "Perfuração & Poços",
+      title: "Drilling & Wells",
       icon: "🔧",
-      frontDescription: "Perfuração especializada e construção de poços de água.",
+      frontDescription: "Specialized drilling and water well construction.",
       backDetails: [
         "Borehole drilling and construction",
         "Water well development",
@@ -42,9 +42,9 @@ export default function GeohydrologyPage() {
       ],
     },
     {
-      title: "Barragens & Químicos",
+      title: "Dams & Chemicals",
       icon: "⚗️",
-      frontDescription: "Estudos hidráulicos e análises químicas avançadas.",
+      frontDescription: "Hydraulic studies and advanced chemical analysis.",
       backDetails: [
         "Dam design and safety assessment",
         "Hydraulic modeling and analysis",
@@ -54,9 +54,9 @@ export default function GeohydrologyPage() {
       ],
     },
     {
-      title: "Mitigação de Enchentes",
+      title: "Flood Mitigation",
       icon: "🌊",
-      frontDescription: "Soluções para controle e mitigação de inundações.",
+      frontDescription: "Solutions for flood control and mitigation.",
       backDetails: [
         "Flood risk assessment and mapping",
         "Drainage system design",
@@ -68,10 +68,10 @@ export default function GeohydrologyPage() {
   ]
 
   const additionalServices = [
-    { icon: "🔍", title: "Consultoria" },
-    { icon: "💡", title: "Inovação" },
-    { icon: "🎯", title: "Partículas" },
-    { icon: "🛠️", title: "Tratamento" },
+    { icon: "🔍", title: "Consulting" },
+    { icon: "💡", title: "Innovation" },
+    { icon: "🎯", title: "Analysis" },
+    { icon: "🛠️", title: "Treatment" },
   ]
 
   return (
@@ -79,30 +79,30 @@ export default function GeohydrologyPage() {
       <StickyNavbar />
       <main className="min-h-screen bg-neutral-950">
         {/* Hero Header */}
-        <section className="relative bg-gradient-to-br from-neutral-900 to-neutral-950 px-8 py-32 lg:px-16">
+        <section className="relative bg-gradient-to-br from-neutral-900 to-neutral-950 px-8 py-24 lg:px-16 lg:py-28">
           <div className="mx-auto max-w-7xl text-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 text-5xl font-bold text-white lg:text-6xl"
+              className="mb-6 text-4xl font-bold text-white lg:text-5xl"
             >
-              GEOHIDROLOGIA & ESTUDOS HIDRÁULICOS
+              GeoHydrology & Hydraulic Studies
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="mx-auto max-w-3xl text-xl text-neutral-300"
+              className="mx-auto max-w-3xl text-lg text-neutral-300"
             >
-              Soluções avançadas para água e recursos hídricos subterrâneos.
+              Advanced solutions for water and underground water resources.
             </motion.p>
           </div>
         </section>
 
         {/* Services Cards Grid */}
-        <section className="bg-neutral-950 px-8 py-24 lg:px-16">
+        <section className="bg-neutral-950 px-8 py-16 lg:px-16 lg:py-20">
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-16 text-center text-3xl font-bold text-white">NOSSOS SERVIÇOS</h2>
+            <h2 className="mb-12 text-center text-3xl font-bold text-white">Our Services</h2>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {services.map((service, index) => (
@@ -163,7 +163,7 @@ export default function GeohydrologyPage() {
         {/* Additional Solutions */}
         <section className="bg-neutral-900 px-8 py-16 lg:px-16">
           <div className="mx-auto max-w-7xl">
-            <h3 className="mb-8 text-center text-2xl font-bold text-white">SOLUÇÕES ADICIONAIS</h3>
+            <h3 className="mb-8 text-center text-2xl font-bold text-white">Additional Solutions</h3>
             <div className="flex flex-wrap justify-center gap-8">
               {additionalServices.map((service, index) => (
                 <motion.div
@@ -192,13 +192,13 @@ export default function GeohydrologyPage() {
               viewport={{ once: true }}
               className="rounded-lg border border-neutral-800 bg-neutral-900 p-12 text-center"
             >
-              <h3 className="mb-4 text-3xl font-bold text-white">PRECISA DE SOLUÇÕES HIDROLÓGICAS?</h3>
+              <h3 className="mb-4 text-3xl font-bold text-white">Need hydrological solutions?</h3>
               <p className="mb-8 text-lg text-neutral-300">
-                Deixe-nos ajudá-lo a gerenciar recursos hídricos de forma eficaz e sustentável.
+                Let us help you manage water resources effectively and sustainably.
               </p>
               <a href="/#contato">
                 <Button className="rounded-full bg-yellow-400 px-10 py-6 text-lg font-semibold text-neutral-900 transition-all hover:bg-yellow-300">
-                  FALE CONOSCO
+                  Contact Us
                 </Button>
               </a>
             </motion.div>
